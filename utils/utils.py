@@ -207,7 +207,7 @@ class TaskDecomposer:
         HEADERS = {
                 "Content-Type": "application/json",
                 # "Authorization": f"Bearer {os.getenv("HYPERBOLIC")}"
-                "Authorization": f"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ2YWliczE3MTdAZ21haWwuY29tIiwiaWF0IjoxNzQ0NDkyNTg0fQ.s3kVhBY0sTEaQyaeHt_3cDS1Rw7TFMjiOvkS8veql6Y"
+                "Authorization": f"Bearer {os.getenv("HYPERBOLIC")}"
             }
         data = {
             "messages": [
