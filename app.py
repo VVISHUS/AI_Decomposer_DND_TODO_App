@@ -8,14 +8,21 @@ from utils.utils import TaskDecomposer
 
 app=FastAPI(title="LLM Task Decomposer API")
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(title="LLM Task Decomposer API")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8000",
-                   "https://ai-decomposer-dnd-todo-app.vercel.app/"],  # Your React app's origin
+    allow_origins=[
+        "http://localhost:3000",
+        "https://ai-decomposer-dnd-todo-app.vercel.app"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],  # Or specify ["POST", "GET", etc.]
+    allow_methods=["*"],
     allow_headers=["*"],
 )
+
 class QueryRequest(BaseModel):
     model:str ="gemini"
     query:str
