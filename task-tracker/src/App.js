@@ -346,7 +346,7 @@ function App() {
     try {
       const apiUrl = process.env.REACT_APP_API_URL;
       const cleanModel = selectedModel.replace(/[\u231A-\uD83E\uDDFF\u2600-\u26FF\u2700-\u27BF]/g, "").trim();
-      const response = await axios.post("http://localhost:5000/decompose/", {
+      const response = await axios.post(apiUrl, {
         model: cleanModel,
         query: input
       });
