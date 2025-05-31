@@ -10,7 +10,8 @@ app=FastAPI(title="LLM Task Decomposer API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8000"],  # Your React app's origin
+    allow_origins=["http://localhost:8000",
+                   "https://ai-decomposer-dnd-todo-app.vercel.app/"],  # Your React app's origin
     allow_credentials=True,
     allow_methods=["*"],  # Or specify ["POST", "GET", etc.]
     allow_headers=["*"],
