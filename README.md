@@ -108,7 +108,7 @@ npm run dev  # or `npm start` if using plain React
 
 ---
 
-###📄 License
+## 📄 License
 This project is open-source and available under the MIT License.
 
 ---
