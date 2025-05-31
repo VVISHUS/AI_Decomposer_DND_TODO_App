@@ -48,7 +48,7 @@ A full-stack AI productivity tool that uses powerful LLMs to **break down comple
 - 🌍 **Frontend**: Deployed on **[Vercel](https://vercel.com/vaibhav-singhs-projects-c5ab9c36/ai-decomposer-dnd-todo-app)**
 - 🧠 **Backend**: Powered by FastAPI and hosted on **Render**
 
-> 🔗 **Try it Live**: [AI Decomposer DnD ToDo App →](https://vercel.com/vaibhav-singhs-projects-c5ab9c36/ai-decomposer-dnd-todo-app)
+> 🔗 **Try it Live**: [AI Decomposer DnD ToDo App →](https://ai-decomposer-dnd-todo-app.vercel.app/)
 
 ---
 
