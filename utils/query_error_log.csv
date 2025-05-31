@@ -7,3 +7,5 @@ timestamp,model,query,error
 2025-05-31T20:56:00.892645,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
 2025-05-31T21:13:02.843799,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
 2025-05-31T21:13:02.844213,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T22:42:29.609742,gemini,I want to create a portfolio website,GEMINI_API_KEY environment variable not set
+2025-05-31T22:42:29.610255,gemini,I want to create a portfolio website,GEMINI_API_KEY environment variable not set

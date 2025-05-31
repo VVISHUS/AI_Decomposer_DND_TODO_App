@@ -1,5 +1,4 @@
 /* Color Variables - Easily change these to update the entire theme */
-
 :root {
   /* Primary Color (Dominant) */
   --primary: #4a6fa5; /* Soft blue */
@@ -15,12 +14,12 @@
   --success: #28a745; /* Green */
 }
 
-
 body, html {
   margin: 0;
   padding: 0;
-  background-color: #f0f2f5; /* Your chosen color */
+  background-color: #f0f2f5;
 }
+
 /* Base Styles */
 .app {
   padding: 20px;
@@ -68,7 +67,7 @@ body, html {
 }
 
 .task-input-form button:hover {
-  background-color: #3a5a8f; /* Darker shade of primary */
+  background-color: #3a5a8f;
 }
 
 .task-input-form button:disabled {
@@ -83,42 +82,20 @@ body, html {
   gap: 20px;
 }
 
-/* Columns */
+/* Columns Container - UPDATED */
 .columns {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  overflow-x: auto;
+  justify-content: center;
   padding-bottom: 20px;
-  justify-content: center; /* This centers the columns */
-  margin: 0 auto; /* This helps with centering */
-  max-width: fit-content; /* Ensures the container only takes needed space */
 }
 
-/* Optional: Adjust column width for better centering */
+/* Column Styles - UPDATED */
 .column {
-  flex: 0 0 300px; /* Keep this or adjust as needed */
-  /* Rest of your column styles remain the same */
-}
-
-
-.columns::-webkit-scrollbar {
-  height: 8px;
-}
-
-.columns::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-  border-radius: 4px;
-}
-
-.columns::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 4px;
-}
-
-/* Column Styles */
-.column {
-  position: relative;
-  flex: 0 0 300px;
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
   background-color: var(--bg-dark);
   border-radius: 8px;
   padding: 15px;
@@ -135,7 +112,7 @@ body, html {
 }
 
 .column.hovered {
-  background-color: rgba(74, 111, 165, 0.1); /* 10% opacity of primary */
+  background-color: rgba(74, 111, 165, 0.1);
   box-shadow: inset 0 0 0 2px var(--primary);
 }
 
@@ -148,12 +125,13 @@ body, html {
   min-height: 200px;
   padding: 5px;
   border-radius: 4px;
+  overflow-y: auto;
 }
 
 .tasks:empty {
   min-height: 100px;
   border: 2px dashed var(--primary);
-  background-color: rgba(74, 111, 165, 0.05); /* 5% opacity of primary */
+  background-color: rgba(74, 111, 165, 0.05);
 }
 
 /* Task Cards */
@@ -193,7 +171,7 @@ body, html {
 }
 
 .task-steps li:hover {
-  background-color: rgba(255, 154, 118, 0.1); /* 10% opacity of secondary */
+  background-color: rgba(255, 154, 118, 0.1);
   border-radius: 4px;
 }
 
@@ -212,7 +190,7 @@ body, html {
 }
 
 .add-task-btn:hover {
-  background-color: rgba(74, 111, 165, 0.1); /* 10% opacity of primary */
+  background-color: rgba(74, 111, 165, 0.1);
   border-color: var(--secondary);
 }
 
@@ -236,7 +214,7 @@ body, html {
 
 .add-subtask-btn {
   padding: 6px 10px;
-  background-color: rgba(255, 154, 118, 0.1); /* 10% opacity of secondary */
+  background-color: rgba(255, 154, 118, 0.1);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -283,7 +261,7 @@ body, html {
 }
 
 .task-title:hover, .step-content:hover {
-  background-color: rgba(255, 154, 118, 0.1); /* 10% opacity of secondary */
+  background-color: rgba(255, 154, 118, 0.1);
   border-radius: 4px;
 }
 
@@ -309,41 +287,22 @@ body, html {
   text-decoration: underline;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 1000px) and (min-width: 769px) {
+/* Responsive Adjustments - UPDATED */
+@media (max-width: 1000px) {
   .column {
-    flex: 0 0 280px;
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
   }
 }
 
-@media (max-width: 768px) {
-  .columns {
-    justify-content: flex-start; /* Switch back to left-aligned on mobile */
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
+@media (max-width: 600px) {
   .column {
-    width: 100%;
-    min-height: auto;
-  }
-
-  .tasks {
-    flex-direction: row;
-    overflow-x: auto;
-    padding-bottom: 15px;
-    min-height: 150px;
-  }
-
-  .task-card {
-    flex: 0 0 280px;
-    min-width: 280px;
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
 
-
-
-/* Column Color Tints - Alternative */
+/* Column Color Tints */
 .column[data-column-id="todo"] {
   background-color: var(--bg-dark);
   background-image: linear-gradient(var(--todo-tint), var(--todo-tint));

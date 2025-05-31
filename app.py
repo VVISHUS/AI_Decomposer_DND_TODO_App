@@ -15,7 +15,7 @@ app = FastAPI(title="LLM Task Decomposer API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
+        "http://localhost:8000",
         "https://ai-decomposer-dnd-todo-app.vercel.app"
     ],
     allow_credentials=True,
@@ -33,3 +33,6 @@ def get_task_breakdown(request:QueryRequest):
     result=handler.answer(request.model,request.query)
     return result
 
+
+# if __name__ == "__main__":
+#     uvicorn.run("app:app",host="0.0.0.0",port=5000)
