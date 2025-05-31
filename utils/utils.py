@@ -6,7 +6,29 @@ from datetime import datetime
 from openai import OpenAI
 import google.generativeai as genai
 from anthropic import Anthropic
+import requests
+MODELS = {
+    "llama-3.3_70B": "meta-llama/Llama-3.3-70B-Instruct",
+    "llama-3.1_8B": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "hermes-3_70B": "NousResearch/Hermes-3-Llama-3.1-70B",
+    "qwq_32B": "Qwen/QwQ-32B-Preview",
+    "deepseek-v3": "deepseek-ai/DeepSeek-V3",
+    "qwq_32B_alt": "Qwen/QwQ-32B",
+    "deepseek-v3_0324": "deepseek-ai/DeepSeek-V3-0324",
+    "deepseek-r1": "deepseek-ai/DeepSeek-R1",
+    "qwen2.5-coder_32B": "Qwen/Qwen2.5-Coder-32B-Instruct",
+    "llama-3.2_3B": "meta-llama/Llama-3.2-3B-Instruct",
+    "qwen2.5_72B": "Qwen/Qwen2.5-72B-Instruct",
+    "llama-3_70B": "meta-llama/Meta-Llama-3-70B-Instruct",
+    "llama-3.1_405B": "meta-llama/Meta-Llama-3.1-405B-Instruct",
+    "llama-3.1_70B": "meta-llama/Meta-Llama-3.1-70B-Instruct",
+    "gemini-1.5-flash": "gemini",
+    "openAI":"openai", 
+    "anthropic":"anthropic"
+}
 
+# print(MODELS.keys())
+# print(f"{"llama-3_70B" in MODELS.keys()}")
 MASTER_PROMPT = """You are a productivity assistant. Your job is to break any user-defined goal into clear, practical subtasks and steps.
 Return the output as a valid pure JSON object with the format:
 {
@@ -26,6 +48,7 @@ Return the output as a valid pure JSON object with the format:
   }
 }
 Do NOT include any text or Markdown formatting like ```json. Only return valid JSON."""
+
 SUCCESS_LOG = "utils/query_success_log.csv"
 ERROR_LOG = "utils/query_error_log.csv"
 
@@ -115,12 +138,11 @@ class TaskDecomposer:
                 response_format={"type": "json_object"}
             )
             content = response.choices[0].message.content
-            parsed = self._parse_json_response(content)
-            # print(f"parsed:\n{parsed}")
-            if "error" in parsed:
-                raise ValueError(parsed["error"])     
+            # parsed = self._parse_json_response(content)
+            # if "error" in parsed:
+            #     raise ValueError(parsed["error"])     
                 
-            return parsed
+            return content
             
         except Exception as e:
             self._log_error("openai", query, str(e))
@@ -144,12 +166,12 @@ class TaskDecomposer:
             )
             content = response.text
             # print(content)
-            parsed = self._parse_json_response(content)
+            # parsed = self._parse_json_response(content)
             
-            if "error" in parsed:
-                raise ValueError(parsed["error"])
+            # if "error" in parsed:
+            #     raise ValueError(parsed["error"])
                 
-            return parsed
+            return content
             
         except Exception as e:
             self._log_error("gemini", query, str(e))
@@ -170,33 +192,67 @@ class TaskDecomposer:
                 messages=[{"role": "user", "content": query}]
             )
             content = response.content[0].text
-            parsed = self._parse_json_response(content)
+            # parsed = self._parse_json_response(content)
             
-            if "error" in parsed:
-                raise ValueError(parsed["error"])
+            # if "error" in parsed:
+            #     raise ValueError(parsed["error"])
                 
-            return parsed
+            return content
             
         except Exception as e:
             self._log_error("anthropic", query, str(e))
             raise
+    def decompose_with_hyperbolic_models(self, model:str,query:str)->dict:
+        URL = "https://api.hyperbolic.xyz/v1/chat/completions"
+        HEADERS = {
+                "Content-Type": "application/json",
+                # "Authorization": f"Bearer {os.getenv("HYPERBOLIC")}"
+                "Authorization": f"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ2YWliczE3MTdAZ21haWwuY29tIiwiaWF0IjoxNzQ0NDkyNTg0fQ.s3kVhBY0sTEaQyaeHt_3cDS1Rw7TFMjiOvkS8veql6Y"
+            }
+        data = {
+            "messages": [
+                    {"role": "system", "content": MASTER_PROMPT},
+                    {"role": "user", "content": query}
+                ],
+                "model":model,
+                "temperature":self.temperature
+         }
+        try:
+            response = requests.post(URL, headers=HEADERS, json=data)
+            response.raise_for_status()
+            result = response.json()
+            answer = result['choices'][0]['message']['content']
+            return answer
+        except Exception as e:
+            self._log_error(model, query, str(e))
+            raise
 
     def answer(self, model: str, query: str) -> dict:
         try:
-            model = model.lower()
-            if model == "openai":
-                result = self.decompose_with_openai(query)
-            elif model == "gemini":
-                result = self.decompose_with_gemini(query)
-            elif model == "anthropic":
-                result = self.decompose_with_anthropic(query)
+            um_model=MODELS[model]
+            result=None
+            if um_model == "openai":
+                result = self.decompose_with_openai(query=query)
+            elif um_model == "gemini":
+                result = self.decompose_with_gemini(query=query)
+            elif um_model == "anthropic":
+                result = self.decompose_with_anthropic(query=query)
+            elif model in MODELS.keys():
+                result= self.decompose_with_hyperbolic_models(model=MODELS[model],query=query)
             else:
                 raise ValueError(f"Unsupported model: {model}")
+            
+            print(f"result:\n {result}\n")
+            fresult=self._parse_json_response(result)
+            print(f"final result:\n {fresult}")
+            if "error" in fresult:
+                raise ValueError(fresult["error"])
+            
+            self._log_success(model, query, fresult)
 
-            self._log_success(model, query, result)
             return {
                 "status": "success",
-                "data": result
+                "data": fresult
             }
             
         except Exception as e:
@@ -207,10 +263,10 @@ class TaskDecomposer:
                 "raw_output": getattr(e, "raw_output", None)
             }
         
-payload = {
-    "model": "gemini",  # or "gemini" or "anthropic"
-    "query": "I want to build a portfolio website. What steps should I follow?"
-}
+# payload = {
+#     "model": "llama-3_70B",  # or "gemini" or "anthropic"
+#     "query": "I want to build a portfolio website. What steps should I follow?"
+# }
 
 # handler=TaskDecomposer()
 # result=handler.answer(**payload)

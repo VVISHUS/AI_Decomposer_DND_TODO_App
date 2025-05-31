@@ -19,11 +19,28 @@ import {
 import "../src/App.css";
 import { CSS } from '@dnd-kit/utilities';
 import { rectIntersection } from '@dnd-kit/core';
-// Add this near your other imports
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Notification component (add this near your other components)
+const MODEL_KEYS = [
+  "llama-3.3_70B",
+  "llama-3.1_8B⚡",
+  // "hermes-3_70B",
+  // "qwq_32B",
+  "deepseek-v3",
+  // "qwq_32B_alt",
+  "deepseek-v3_0324",
+  // "deepseek-r1",
+  "qwen2.5-coder_32B",
+  "llama-3.2_3B⚡",
+  "qwen2.5_72B",
+  "llama-3_70B⚡",
+  // "llama-3.1_405B",
+  "llama-3.1_70B",
+  "gemini-1.5-flash⚡"
+];
+
+
 const Notification = () => (
   <ToastContainer
     position="top-right"
@@ -299,6 +316,7 @@ function App() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [activeId, setActiveId] = useState(null);
+  const [selectedModel, setSelectedModel] = useState("gemini-1.5-flash");
   const [columns, setColumns] = useState({
     'todo': { id: 'todo', title: 'To Do', items: [] },
     'in-progress': { id: 'in-progress', title: 'In Progress', items: [] },
@@ -316,80 +334,89 @@ function App() {
     })
   );
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!input.trim()) return;
-
-  setIsLoading(true);
-  try {
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const response = await axios.post(apiUrl, { query: input });
-    
-    // Check for API-level errors
-    if (response.data.status === "error") {
-      throw new Error(response.data.message || 'Failed to process your request');
-    }
-
-    // Validate response structure
-    if (!response.data.data || typeof response.data.data !== 'object') {
-      throw new Error('Invalid response format from server');
-    }
-
-    const subtasks = response.data.data;
-    const newTasks = [];
-    let subtaskCounter = 1;
-    
-    for (const [subtaskKey, subtaskData] of Object.entries(subtasks)) {
-      // Validate subtask structure
-      if (!subtaskData || typeof subtaskData !== 'object' || 
-          !subtaskData.title || !subtaskData.steps) {
-        console.warn(`Skipping invalid subtask: ${subtaskKey}`);
-        continue;
-      }
-
-      const taskId = `task-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-      
-      // Convert steps to array format with proper numbering
-      const taskSteps = Object.entries(subtaskData.steps).map(([stepKey, stepContent], index) => ({
-        id: `step-${taskId}-${index + 1}`,
-        content: `${stepContent}` // Add numbering to step content
-      }));
-      
-      // Add numbering to subtask title if not already present
-      const subtaskTitle = subtaskData.title.startsWith(`${subtaskCounter}.`) 
-        ? subtaskData.title 
-        : `${subtaskCounter}. ${subtaskData.title}`;
-      
-      newTasks.push({
-        id: taskId,
-        content: subtaskTitle,
-        steps: taskSteps
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+  // Validate input length
+  if (input.trim().length < 5) {
+    toast.error('Please enter at least 5 characters for your goal');
+    return;
+  }
+    setIsLoading(true);
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const cleanModel = selectedModel.replace(/[\u231A-\uD83E\uDDFF\u2600-\u26FF\u2700-\u27BF]/g, "").trim();
+      const response = await axios.post("http://localhost:5000/decompose/", {
+        model: cleanModel,
+        query: input
       });
       
-      subtaskCounter++;
-    }
-    
-    if (newTasks.length === 0) {
-      throw new Error('No valid tasks were created from the response');
-    }
-    
-    setColumns(prevColumns => ({
-      ...prevColumns,
-      'todo': {
-        ...prevColumns['todo'],
-        items: [...prevColumns['todo'].items, ...newTasks]
+      // Check for API-level errors
+      if (response.data.status === "error") {
+        throw new Error(response.data.message || 'Failed to process your request');
       }
-    }));
-    
-    setInput('');
-    toast.success(`Created ${newTasks.length} tasks successfully!`);
-  } catch (error) {
-    console.error('Error:', error);
-    toast.error(error.message || 'Failed to create tasks');
-  } finally {
-    setIsLoading(false);
-  }
-};
+
+      // Validate response structure
+      if (!response.data.data || typeof response.data.data !== 'object') {
+        throw new Error('Invalid response format from server');
+      }
+
+      const subtasks = response.data.data;
+      const newTasks = [];
+      let subtaskCounter = 1;
+      
+      for (const [subtaskKey, subtaskData] of Object.entries(subtasks)) {
+        // Validate subtask structure
+        if (!subtaskData || typeof subtaskData !== 'object' || 
+            !subtaskData.title || !subtaskData.steps) {
+          console.warn(`Skipping invalid subtask: ${subtaskKey}`);
+          continue;
+        }
+
+        const taskId = `task-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+        
+        // Convert steps to array format with proper numbering
+        const taskSteps = Object.entries(subtaskData.steps).map(([stepKey, stepContent], index) => ({
+          id: `step-${taskId}-${index + 1}`,
+          content: `${stepContent}`
+        }));
+        
+        // Add numbering to subtask title if not already present
+        const subtaskTitle = subtaskData.title.startsWith(`${subtaskCounter}.`) 
+          ? subtaskData.title 
+          : `${subtaskCounter}. ${subtaskData.title}`;
+        
+        newTasks.push({
+          id: taskId,
+          content: subtaskTitle,
+          steps: taskSteps
+        });
+        
+        subtaskCounter++;
+      }
+      
+      if (newTasks.length === 0) {
+        throw new Error('No valid tasks were created from the response');
+      }
+      
+      setColumns(prevColumns => ({
+        ...prevColumns,
+        'todo': {
+          ...prevColumns['todo'],
+          items: [...prevColumns['todo'].items, ...newTasks]
+        }
+      }));
+      
+      setInput('');
+      toast.success(`Created ${newTasks.length} tasks successfully using ${selectedModel}!`);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error(error.message || 'Failed to create tasks');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleAddTask = (columnId, newTask) => {
     setColumns(prevColumns => ({
       ...prevColumns,
@@ -490,20 +517,38 @@ const handleSubmit = async (e) => {
     return null;
   };
 
-  return (
+   return (
     <div className="app">
-        <Notification />
+      <Notification />
       <header className="app-header">
         <h1>LLM-Powered Task Tracker</h1>
         <form onSubmit={handleSubmit} className="task-input-form">
+          <div className="model-selector">
+            <label htmlFor="model-select">Model: </label>
+            <select
+              id="model-select"
+              value={selectedModel}
+              onChange={(e) => setSelectedModel(e.target.value)}
+              disabled={isLoading}
+            >
+              {MODEL_KEYS.map((modelKey) => (
+                <option key={modelKey} value={modelKey}>
+                  {modelKey}
+                </option>
+              ))}
+            </select>
+          </div>
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter your goal (e.g., 'I want to create my project portfolio')"
+            placeholder="Enter your goal"
             disabled={isLoading}
           />
-          <button type="submit" disabled={isLoading || !input.trim()}>
+          <button 
+            type="submit" 
+            disabled={isLoading || !input.trim() || input.trim().length < 5}
+          >
             {isLoading ? 'Processing...' : 'Create Tasks'}
           </button>
         </form>
