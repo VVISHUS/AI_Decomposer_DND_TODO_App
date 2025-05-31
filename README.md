@@ -54,10 +54,34 @@ A full-stack AI productivity tool that uses powerful LLMs to **break down comple
 
 ## 🧰 Installation
 
-### 1. Backend Setup
+🔙 1. Backend Setup
+# Clone the repository
+gh repo clone VVISHUS/AI_Decomposer_DND_TODO_App
+cd AI_Decomposer_DND_TODO_App/backend
 
-```bash
-git 
-cd llm-task-decomposer/backend
+# Create and activate a virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+# Install Python dependencies
 pip install -r requirements.txt
-uvicorn app:app --reload
+
+# Run the FastAPI backend server
+uvicorn app:app --port 5000 --reload
+🚀 The backend will be accessible at:
+http://localhost:5000/decompose/
+
+🎨 2. Frontend Setup
+# Navigate to the frontend project directory
+cd ../task-tracker
+
+# Install frontend dependencies
+npm install
+
+# Update the API URL in the frontend
+# Open src/App.js and set the API URL like this:
+# const apiUrl = "http://localhost:5000/decompose/";
+
+# Start the React development server
+npm run dev  # or `npm start` if using plain React
+🧠 Make sure your FastAPI backend is running before using the frontend!
