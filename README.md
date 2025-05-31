@@ -97,6 +97,7 @@ npm run dev  # or `npm start` if using plain React
 ```
 ## 🧠 Make sure your FastAPI backend is running before using the frontend!
 
+---
 
 ## 🚀 Future Improvements
 - Add authentication (e.g., Google OAuth)
@@ -105,10 +106,12 @@ npm run dev  # or `npm start` if using plain React
 - Task deadline and priority support
 - Support for more LLMs and configurable prompts
 
+---
 
-
-📄 License
+###📄 License
 This project is open-source and available under the MIT License.
+
+---
 
 ## 📢 Feedback & Contributions
 If you encounter bugs or have suggestions, feel free to open an issue or submit a pull request on GitHub.
