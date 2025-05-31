@@ -22,7 +22,6 @@ A full-stack AI productivity tool that uses powerful LLMs to **break down comple
 
 - 📊 **Kanban-Style Visualization** – Clear, visual organization of all your tasks
 
-- 📱 **Responsive Design** – Works seamlessly on both desktop and mobile
 
 ---
 
