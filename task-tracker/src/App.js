@@ -27,7 +27,7 @@ const MODEL_KEYS = [
   "llama-3.1_8B⚡",
   // "hermes-3_70B",
   // "qwq_32B",
-  "deepseek-v3",
+  // "deepseek-v3",
   // "qwq_32B_alt",
   "deepseek-v3_0324",
   // "deepseek-r1",
@@ -36,7 +36,7 @@ const MODEL_KEYS = [
   "qwen2.5_72B",
   "llama-3_70B⚡",
   // "llama-3.1_405B",
-  "llama-3.1_70B",
+  "llama-3.1_70B⚡",
   "gemini-1.5-flash⚡"
 ];
 

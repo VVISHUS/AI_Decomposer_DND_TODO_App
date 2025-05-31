@@ -30,7 +30,7 @@ MODELS = {
 # print(MODELS.keys())
 # print(f"{"llama-3_70B" in MODELS.keys()}")
 MASTER_PROMPT = """You are a productivity assistant. Your job is to break any user-defined goal into clear, practical subtasks and steps.
-Return the output as a valid pure JSON object with the format:
+Return the output as a valid pure JSON object with the the below format exactly:
 {
   "Subtask1": {
     "title": "1. Subtask Title",
@@ -47,7 +47,8 @@ Return the output as a valid pure JSON object with the format:
     ]
   }
 }
-Do NOT include any text or Markdown formatting like ```json. Only return valid JSON."""
+Output json should be matching 100% with above format given.
+Only return valid JSON."""
 
 SUCCESS_LOG = "utils/query_success_log.csv"
 ERROR_LOG = "utils/query_error_log.csv"
@@ -263,7 +264,7 @@ class TaskDecomposer:
             }
         
 # payload = {
-#     "model": "llama-3_70B",  # or "gemini" or "anthropic"
+#     "model": "llama-3.2_3B",  # or "gemini" or "anthropic"
 #     "query": "I want to build a portfolio website. What steps should I follow?"
 # }
 
