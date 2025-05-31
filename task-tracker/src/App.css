@@ -1,0 +1,385 @@
+/* Color Variables - Easily change these to update the entire theme */
+
+:root {
+  /* Primary Color (Dominant) */
+  --primary: #4a6fa5; /* Soft blue */
+  /* Secondary Color (Accent) */
+  --secondary: #ff9a76; /* Coral */
+  /* Background Colors */
+  --bg-light: #f8f9fa; /* Very light grey */
+  --bg-dark: #e9ecef; /* Slightly darker grey */
+  /* Text Colors */
+  --text-dark: #343a40; /* Dark grey */
+  --text-light: #f8f9fa; /* White */
+  /* Status Colors */
+  --success: #28a745; /* Green */
+}
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5; /* Your chosen color */
+}
+/* Base Styles */
+.app {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--bg-light);
+  min-height: 100vh;
+}
+
+.app-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.app-header h1 {
+  color: var(--primary);
+}
+
+/* Task Input Form */
+.task-input-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.task-input-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background-color: white;
+}
+
+.task-input-form button {
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: var(--text-light);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.task-input-form button:hover {
+  background-color: #3a5a8f; /* Darker shade of primary */
+}
+
+.task-input-form button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* Board Layout */
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Columns */
+.columns {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  justify-content: center; /* This centers the columns */
+  margin: 0 auto; /* This helps with centering */
+  max-width: fit-content; /* Ensures the container only takes needed space */
+}
+
+/* Optional: Adjust column width for better centering */
+.column {
+  flex: 0 0 300px; /* Keep this or adjust as needed */
+  /* Rest of your column styles remain the same */
+}
+
+
+.columns::-webkit-scrollbar {
+  height: 8px;
+}
+
+.columns::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+  border-radius: 4px;
+}
+
+.columns::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
+/* Column Styles */
+.column {
+  position: relative;
+  flex: 0 0 300px;
+  background-color: var(--bg-dark);
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 300px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.column h2 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary);
+  color: var(--text-dark);
+}
+
+.column.hovered {
+  background-color: rgba(74, 111, 165, 0.1); /* 10% opacity of primary */
+  box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+/* Tasks Container */
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+  min-height: 200px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.tasks:empty {
+  min-height: 100px;
+  border: 2px dashed var(--primary);
+  background-color: rgba(74, 111, 165, 0.05); /* 5% opacity of primary */
+}
+
+/* Task Cards */
+.task-card {
+  background-color: white;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: grab;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.task-card:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 4px 8px rgba(255, 154, 118, 0.2);
+}
+
+.task-card.dragging {
+  transform: rotate(3deg);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  opacity: 0.8;
+  border-color: var(--secondary);
+}
+
+.task-steps {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.task-steps li {
+  margin-bottom: 5px;
+  padding: 3px;
+  transition: all 0.2s;
+}
+
+.task-steps li:hover {
+  background-color: rgba(255, 154, 118, 0.1); /* 10% opacity of secondary */
+  border-radius: 4px;
+}
+
+/* Add Task Button */
+.add-task-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border: 2px dashed var(--primary);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--primary);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.add-task-btn:hover {
+  background-color: rgba(74, 111, 165, 0.1); /* 10% opacity of primary */
+  border-color: var(--secondary);
+}
+
+/* Add Task Form */
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid var(--primary);
+}
+
+.add-task-form input {
+  padding: 8px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+}
+
+.add-subtask-btn {
+  padding: 6px 10px;
+  background-color: rgba(255, 154, 118, 0.1); /* 10% opacity of secondary */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--primary);
+  font-size: 13px;
+  align-self: flex-start;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.save-btn {
+  padding: 8px 15px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  padding: 8px 15px;
+  background-color: white;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Editable Text */
+.task-title, .step-content {
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.task-title:hover, .step-content:hover {
+  background-color: rgba(255, 154, 118, 0.1); /* 10% opacity of secondary */
+  border-radius: 4px;
+}
+
+.task-title input, .step-content input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  font-size: inherit;
+}
+
+.add-step-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.add-step-btn:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1000px) and (min-width: 769px) {
+  .column {
+    flex: 0 0 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .columns {
+    justify-content: flex-start; /* Switch back to left-aligned on mobile */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .column {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .tasks {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    min-height: 150px;
+  }
+
+  .task-card {
+    flex: 0 0 280px;
+    min-width: 280px;
+  }
+}
+
+
+
+/* Column Color Tints - Alternative */
+.column[data-column-id="todo"] {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(var(--todo-tint), var(--todo-tint));
+}
+
+.column[data-column-id="in-progress"] {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(var(--progress-tint), var(--progress-tint));
+}
+
+.column[data-column-id="done"] {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(var(--done-tint), var(--done-tint));
+}
+
+/* Hover states */
+.column[data-column-id="todo"].hovered {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(
+    color-mix(in srgb, var(--todo-tint) 20%, transparent 80%),
+    color-mix(in srgb, var(--todo-tint) 20%, transparent 80%)
+  );
+}
+
+.column[data-column-id="in-progress"].hovered {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(
+    color-mix(in srgb, var(--progress-tint) 20%, transparent 80%),
+    color-mix(in srgb, var(--progress-tint) 20%, transparent 80%)
+  );
+}
+
+.column[data-column-id="done"].hovered {
+  background-color: var(--bg-dark);
+  background-image: linear-gradient(
+    color-mix(in srgb, var(--done-tint) 20%, transparent 80%),
+    color-mix(in srgb, var(--done-tint) 20%, transparent 80%)
+  );
+}
