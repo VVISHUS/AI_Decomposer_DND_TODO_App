@@ -206,8 +206,7 @@ class TaskDecomposer:
         URL = "https://api.hyperbolic.xyz/v1/chat/completions"
         HEADERS = {
                 "Content-Type": "application/json",
-                # "Authorization": f"Bearer {os.getenv("HYPERBOLIC")}"
-                "Authorization": f"Bearer {os.getenv("HYPERBOLIC")}"
+                "Authorization": f"Bearer {os.getenv('HYPERBOLIC')}"
             }
         data = {
             "messages": [
