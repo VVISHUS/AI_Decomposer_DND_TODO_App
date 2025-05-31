@@ -1,6 +1,6 @@
 # 🧠 LLM-Powered Task Decomposition App
 
-![Application Screenshot](./screenshot.png)
+![Application Screenshot](Screenshot 2025-06-01 023146.png)
 
 A full-stack AI productivity tool that uses powerful LLMs to **break down complex goals into actionable tasks**, all presented in a sleek, drag-and-drop Kanban interface.
 
