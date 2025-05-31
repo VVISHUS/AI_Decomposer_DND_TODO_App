@@ -4,7 +4,6 @@
   --primary: #4a6fa5; /* Soft blue */
   /* Secondary Color (Accent) */
   --secondary: #ff9a76; /* Coral */
-  --tertiary: #ff9a76
   /* Background Colors */
   --bg-light: #f8f9fa; /* Very light grey */
   --bg-dark: #e9ecef; /* Slightly darker grey */
@@ -18,7 +17,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-color: #f0f2f5;
+  background-color: #fdf6f0;
 }
 
 /* Base Styles */
@@ -26,7 +25,7 @@ body, html {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: var(--bg-light);
+  background-color: #edf2f7;
   min-height: 100vh;
 }
 
@@ -202,7 +201,7 @@ body, html {
   gap: 10px;
   margin-top: 10px;
   padding: 15px;
-  background-color: white;
+  background-color: var(--bg-dark);
   border-radius: 6px;
   border: 1px solid var(--primary);
 }
