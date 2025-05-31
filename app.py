@@ -25,5 +25,3 @@ def get_task_breakdown(request:QueryRequest):
     result=handler.answer(request.model,request.query)
     return result
 
-if __name__ == "__main__":
-    uvicorn.run("app:app",host="0.0.0.0",port=8000)
