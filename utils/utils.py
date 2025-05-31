@@ -129,11 +129,10 @@ class TaskDecomposer:
     def decompose_with_gemini(self, query: str) -> dict:
         """Decompose task using Gemini."""
         try:
-            # if not os.getenv("GEMINI_API_KEY"):
-            #     raise ValueError("GEMINI_API_KEY environment variable not set")
+            if not os.getenv("GEMINI_API_KEY"):
+                raise ValueError("GEMINI_API_KEY environment variable not set")
 
-            # genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-            genai.configure(api_key="AIzaSyDqcK7STmBNmXtPkcKmifpIbAZH4-UU_7o")
+            genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
             model = genai.GenerativeModel("gemini-1.5-flash")
             response = model.generate_content(
