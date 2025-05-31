@@ -316,7 +316,7 @@ function App() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [activeId, setActiveId] = useState(null);
-  const [selectedModel, setSelectedModel] = useState("gemini-1.5-flash");
+  const [selectedModel, setSelectedModel] = useState("gemini-1.5-flash⚡");
   const [columns, setColumns] = useState({
     'todo': { id: 'todo', title: 'To Do', items: [] },
     'in-progress': { id: 'in-progress', title: 'In Progress', items: [] },
