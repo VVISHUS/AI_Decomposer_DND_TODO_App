@@ -316,28 +316,60 @@ function App() {
     })
   );
 
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   if (!input.trim()) return;
 
   setIsLoading(true);
   try {
     const response = await axios.post('http://localhost:5000/decompose/', { query: input });
-    const subtasks = response.data;
-    const newTasks = [];
     
-    for (const [subtaskTitle, steps] of Object.entries(subtasks)) {
-      const taskId = `task-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-      const taskSteps = Object.entries(steps).map(([stepKey, stepContent]) => ({
-        id: `step-${taskId}-${stepKey}`,
-        content: stepContent
+    // Check for API-level errors
+    if (response.data.status === "error") {
+      throw new Error(response.data.message || 'Failed to process your request');
+    }
+
+    // Validate response structure
+    if (!response.data.data || typeof response.data.data !== 'object') {
+      throw new Error('Invalid response format from server');
+    }
+
+    const subtasks = response.data.data;
+    const newTasks = [];
+    let subtaskCounter = 1;
+    
+    for (const [subtaskKey, subtaskData] of Object.entries(subtasks)) {
+      // Validate subtask structure
+      if (!subtaskData || typeof subtaskData !== 'object' || 
+          !subtaskData.title || !subtaskData.steps) {
+        console.warn(`Skipping invalid subtask: ${subtaskKey}`);
+        continue;
+      }
+
+      const taskId = `task-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+      
+      // Convert steps to array format with proper numbering
+      const taskSteps = Object.entries(subtaskData.steps).map(([stepKey, stepContent], index) => ({
+        id: `step-${taskId}-${index + 1}`,
+        content: `${index + 1}. ${stepContent}` // Add numbering to step content
       }));
+      
+      // Add numbering to subtask title if not already present
+      const subtaskTitle = subtaskData.title.startsWith(`${subtaskCounter}.`) 
+        ? subtaskData.title 
+        : `${subtaskCounter}. ${subtaskData.title}`;
       
       newTasks.push({
         id: taskId,
-        content: subtaskTitle.replace('Subtask', '').replace(':', '').trim(),
+        content: subtaskTitle,
         steps: taskSteps
       });
+      
+      subtaskCounter++;
+    }
+    
+    if (newTasks.length === 0) {
+      throw new Error('No valid tasks were created from the response');
     }
     
     setColumns(prevColumns => ({
@@ -349,17 +381,14 @@ function App() {
     }));
     
     setInput('');
-    toast.success(`Tasks created successfully! (Status: ${response.status})`);
+    toast.success(`Created ${newTasks.length} tasks successfully!`);
   } catch (error) {
-    console.error('Error fetching tasks:', error);
-    const status = error.response?.status || 'No response';
-    const message = error.response?.data?.message || error.message;
-    toast.error(`Failed to create tasks: ${message} (Status: ${status})`);
+    console.error('Error:', error);
+    toast.error(error.message || 'Failed to create tasks');
   } finally {
     setIsLoading(false);
   }
 };
-
   const handleAddTask = (columnId, newTask) => {
     setColumns(prevColumns => ({
       ...prevColumns,

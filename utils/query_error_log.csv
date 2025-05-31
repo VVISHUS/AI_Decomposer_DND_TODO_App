@@ -1,36 +1,9 @@
 timestamp,model,query,error
-2025-05-30T19:38:17.792935,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T19:38:20.772258,gemini,I want to build a portfolio website. What are the steps I should take?,"
-  No API_KEY or ADC found. Please either:
-    - Set the `GOOGLE_API_KEY` environment variable.
-    - Manually pass the key with `genai.configure(api_key=my_api_key)`.
-    - Or set up Application Default Credentials, see https://ai.google.dev/gemini-api/docs/oauth for more information."
-2025-05-30T19:38:21.441898,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T19:41:01.980602,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T19:41:04.211338,gemini,I want to build a portfolio website. What are the steps I should take?,"404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
-2025-05-30T19:41:04.541357,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T19:42:10.254680,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T19:42:18.959030,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T19:44:45.663279,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T19:44:55.029977,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T20:50:28.263677,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T20:50:31.243232,gemini,I want to build a portfolio website. What are the steps I should take?,"
-  No API_KEY or ADC found. Please either:
-    - Set the `GOOGLE_API_KEY` environment variable.
-    - Manually pass the key with `genai.configure(api_key=my_api_key)`.
-    - Or set up Application Default Credentials, see https://ai.google.dev/gemini-api/docs/oauth for more information."
-2025-05-30T20:50:31.596027,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T20:51:30.807485,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T20:51:35.283115,gemini,I want to build a portfolio website. What are the steps I should take?,'GetResponse' object has no attribute '_parse_json_response'
-2025-05-30T20:51:35.602685,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T20:53:33.900245,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T20:53:38.430681,gemini,I want to build a portfolio website. What are the steps I should take?,I/O operation on closed file.
-2025-05-30T20:53:38.750815,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T20:58:14.903436,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T20:58:42.362074,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T20:58:56.939762,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T21:00:41.084584,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T21:01:58.163553,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T21:02:14.606026,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
-2025-05-30T21:05:39.801172,openai,I want to build a portfolio website. What are the steps I should take?,The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-2025-05-30T21:05:44.790870,anthropic,I want to build a portfolio website. What are the steps I should take?,"""Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"""
+2025-05-31T20:35:06.007000,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T20:35:06.007404,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T20:36:23.218712,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T20:36:23.219194,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T20:56:00.890379,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T20:56:00.892645,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T21:13:02.843799,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response
+2025-05-31T21:13:02.844213,gemini,I want to build a portfolio website. What steps should I follow?,JSON parsing failed: Could not parse valid JSON from response

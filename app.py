@@ -3,7 +3,8 @@ from pydantic import BaseModel
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 
-from utils.utils import GetResponse
+from utils.utils import TaskDecomposer
+
 
 app=FastAPI(title="LLM Task Decomposer API")
 
@@ -20,11 +21,9 @@ class QueryRequest(BaseModel):
 
 @app.post("/decompose")
 def get_task_breakdown(request:QueryRequest):
-    handler=GetResponse()
+    handler=TaskDecomposer()
     result=handler.answer(request.model,request.query)
     return result
 
 if __name__ == "__main__":
-    config = uvicorn.Config("app:app", port=5000, log_level="info")
-    server = uvicorn.Server(config)
-    server.run()
+    uvicorn.run("app:app",host="0.0.0.0",port=8000)

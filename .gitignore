@@ -1,4 +1,13 @@
-.env
-__pycache__/
-node_modules/
-.ipynb
+# Ignore all .env files at any level
+**/.env
+
+# Ignore all __pycache__ directories at any level
+**/__pycache__/
+
+# Ignore all node_modules directories at any level
+**/node_modules/
+
+# Ignore all Jupyter Notebook checkpoint files or related .ipynb files
+**/*.ipynb
+
+**/*.csv
