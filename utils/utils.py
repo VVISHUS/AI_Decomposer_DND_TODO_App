@@ -116,7 +116,7 @@ class TaskDecomposer:
             )
             content = response.choices[0].message.content
             parsed = self._parse_json_response(content)
-            print(f"parsed:\n{parsed}")
+            # print(f"parsed:\n{parsed}")
             if "error" in parsed:
                 raise ValueError(parsed["error"])     
                 
@@ -143,7 +143,7 @@ class TaskDecomposer:
                 )
             )
             content = response.text
-            print(content)
+            # print(content)
             parsed = self._parse_json_response(content)
             
             if "error" in parsed:
