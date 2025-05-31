@@ -322,7 +322,8 @@ const handleSubmit = async (e) => {
 
   setIsLoading(true);
   try {
-    const response = await axios.post('http://localhost:5000/decompose/', { query: input });
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const response = await axios.post(apiUrl, { query: input });
     
     // Check for API-level errors
     if (response.data.status === "error") {
@@ -351,7 +352,7 @@ const handleSubmit = async (e) => {
       // Convert steps to array format with proper numbering
       const taskSteps = Object.entries(subtaskData.steps).map(([stepKey, stepContent], index) => ({
         id: `step-${taskId}-${index + 1}`,
-        content: `${index + 1}. ${stepContent}` // Add numbering to step content
+        content: `${stepContent}` // Add numbering to step content
       }));
       
       // Add numbering to subtask title if not already present
