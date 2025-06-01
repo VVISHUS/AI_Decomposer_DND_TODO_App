@@ -343,14 +343,28 @@ function App() {
     return;
   }
     setIsLoading(true);
+        const timeoutWarning = setTimeout(() => {
+      toast.warn(
+        <div>
+          <p>Due to server inactivity, the service may be down and redeploying.</p>
+          <p>You can wait 2-5 minutes or come back later.</p>
+        </div>,
+        { autoClose: 30000 } // Show for 10 seconds
+      );
+    }, 25000); // Show after 20 seconds
+
     try {
       const apiUrl = process.env.REACT_APP_API_URL;
       const cleanModel = selectedModel.replace(/[\u231A-\uD83E\uDDFF\u2600-\u26FF\u2700-\u27BF]/g, "").trim();
+      
+      // Add timeout to the axios request (30 seconds total)
       const response = await axios.post(apiUrl, {
         model: cleanModel,
         query: input
-      });
+      }, { timeout: 500000 });
       
+      clearTimeout(timeoutWarning); // Clear the warning if request completes
+    
       // Check for API-level errors
       if (response.data.status === "error") {
         throw new Error(response.data.message || 'Failed to process your request');
