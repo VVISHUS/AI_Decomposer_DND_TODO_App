@@ -27,12 +27,23 @@ class QueryRequest(BaseModel):
     model:str ="gemini"
     query:str
 
-@app.post("/decompose")
-def get_task_breakdown(request:QueryRequest):
-    handler=TaskDecomposer()
-    result=handler.answer(request.model,request.query)
-    return result
+from fastapi import HTTPException
 
+@app.post("/decompose")
+async def get_task_breakdown(request: QueryRequest):
+    try:
+        if not request.query.strip():
+            raise HTTPException(status_code=400, detail="Empty query")
+            
+        handler = TaskDecomposer()
+        return handler.answer(request.model, request.query)
+        
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except TimeoutError:
+        raise HTTPException(status_code=504, detail="LLM timeout")
+    except Exception:
+        raise HTTPException(status_code=500)
 
 # if __name__ == "__main__":
 #     uvicorn.run("app:app",host="0.0.0.0",port=5000)
