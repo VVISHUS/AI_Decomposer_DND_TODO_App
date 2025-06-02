@@ -2,15 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-
 from utils.utils import TaskDecomposer
+from fastapi import HTTPException
+
 
 
 app=FastAPI(title="LLM Task Decomposer API")
-
-from fastapi.middleware.cors import CORSMiddleware
-
-app = FastAPI(title="LLM Task Decomposer API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,7 +24,7 @@ class QueryRequest(BaseModel):
     model:str ="gemini"
     query:str
 
-from fastapi import HTTPException
+handler = TaskDecomposer()
 
 @app.post("/decompose")
 async def get_task_breakdown(request: QueryRequest):
@@ -35,7 +32,6 @@ async def get_task_breakdown(request: QueryRequest):
         if not request.query.strip():
             raise HTTPException(status_code=400, detail="Empty query")
             
-        handler = TaskDecomposer()
         return handler.answer(request.model, request.query)
         
     except ValueError as e:
