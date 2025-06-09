@@ -56,7 +56,6 @@ A full-stack AI productivity tool that uses powerful LLMs to **break down comple
 > 🔗 **Try it Live**: [AI Decomposer DnD ToDo App →](https://vercel.com/vaibhav-singhs-projects-c5ab9c36/ai-decomposer-dnd-todo-app)
 =======
 > 🔗 **Try it Live**: [AI Decomposer DnD ToDo App →](https://ai-decomposer-dnd-todo-app.vercel.app/)
->>>>>>> a77eb86eb4a922f2dcfccaa7a257a6665b422b2a
 
 ---
 
@@ -133,4 +132,3 @@ This project is open-source and available under the MIT License.
 If you encounter bugs or have suggestions, feel free to open an issue or submit a pull request on GitHub.
 Happy Hacking! 🚀
 
->>>>>>> a77eb86eb4a922f2dcfccaa7a257a6665b422b2a
