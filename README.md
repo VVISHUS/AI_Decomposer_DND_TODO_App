@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AI_Decomposer_DND_TODO_App# 🧠 LLM-Powered Task Decomposition App
 
 ![Application Screenshot](./screenshot.png) <!-- Replace with a real screenshot -->
@@ -28,21 +27,17 @@ A full-stack AI productivity tool that uses powerful LLMs to **break down comple
 
 - 📊 **Kanban-Style Visualization** – Clear, visual organization of all your tasks
 
-<<<<<<< HEAD
 - 📱 **Responsive Design** – Works seamlessly on both desktop and mobile
 =======
->>>>>>> a77eb86eb4a922f2dcfccaa7a257a6665b422b2a
 
 ---
 
 ## 🛠 Tech Stack
 
 ### 🖥️ Frontend
-<<<<<<< HEAD
 - ⚛️ React.js + TypeScript
 =======
 - ⚛️ React.js
->>>>>>> a77eb86eb4a922f2dcfccaa7a257a6665b422b2a
 - 📦 DnD Kit – Drag-and-drop functionality
 - 🔔 React Toastify – Toast notifications
 - 📡 Axios – API requests
@@ -61,7 +56,6 @@ A full-stack AI productivity tool that uses powerful LLMs to **break down comple
 - 🌍 **Frontend**: Deployed on **[Vercel](https://vercel.com/vaibhav-singhs-projects-c5ab9c36/ai-decomposer-dnd-todo-app)**
 - 🧠 **Backend**: Powered by FastAPI and hosted on **Render**
 
-<<<<<<< HEAD
 > 🔗 **Try it Live**: [AI Decomposer DnD ToDo App →](https://vercel.com/vaibhav-singhs-projects-c5ab9c36/ai-decomposer-dnd-todo-app)
 =======
 > 🔗 **Try it Live**: [AI Decomposer DnD ToDo App →](https://ai-decomposer-dnd-todo-app.vercel.app/)
@@ -71,7 +65,6 @@ A full-stack AI productivity tool that uses powerful LLMs to **break down comple
 
 ## 🧰 Installation
 
-<<<<<<< HEAD
 ### 1. Backend Setup
 
 ```bash
