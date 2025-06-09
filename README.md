@@ -1,11 +1,8 @@
 # AI_Decomposer_DND_TODO_App# 🧠 LLM-Powered Task Decomposition App
 
-![Application Screenshot](./screenshot.png) <!-- Replace with a real screenshot -->
-=======
 # 🧠 LLM-Powered Task Decomposition App
 
 ![Application Screenshot](Screenshot.png)
->>>>>>> a77eb86eb4a922f2dcfccaa7a257a6665b422b2a
 
 A full-stack AI productivity tool that uses powerful LLMs to **break down complex goals into actionable tasks**, all presented in a sleek, drag-and-drop Kanban interface.
 
